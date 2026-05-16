@@ -1,0 +1,26 @@
+{
+  "name": "bootdev-blog-aggregator-ts",
+  "version": "1.0.0",
+  "description": "boot.dev project to build a blog aggregator with TypeScript",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsx ./src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gr-pf/bootdev-blog-aggregator-ts.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/gr-pf/bootdev-blog-aggregator-ts/issues"
+  },
+  "homepage": "https://github.com/gr-pf/bootdev-blog-aggregator-ts#readme",
+  "devDependencies": {
+    "@types/node": "^25.8.0",
+    "tsx": "^4.22.0",
+    "typescript": "^6.0.3"
+  }
+}
