@@ -29,6 +29,11 @@ function getConfigFilePath(): string {
     return path.join(os.homedir(), "boot-dev", "bootdev-blog-aggregator-ts", ".gatorconfig.json")
 }
 
+function getConfigFilePathHome(): string {
+
+    return path.join(os.homedir(), ".gatorconfig.json")
+}
+
 function writeConfig(cfg: Config): void {
     const obj = {
         db_url: cfg.dbUrl,
@@ -37,6 +42,8 @@ function writeConfig(cfg: Config): void {
     const data = JSON.stringify(obj, null, 2);
     const path = getConfigFilePath();
     fs.writeFileSync(path, data, { encoding: "utf-8" });
+    const homePath = getConfigFilePathHome();
+    fs.writeFileSync(homePath, data, { encoding: "utf-8" });
 }
 
 function validateConfig(rawConfig: any): Config {
