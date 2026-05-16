@@ -12,3 +12,7 @@ export async function getUser(name: string) {
     return result;
 }
 
+export async function deleteUsers() {
+    return await db.delete(users).returning();
+}
+

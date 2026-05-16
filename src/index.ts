@@ -1,7 +1,7 @@
 import { argv, exit } from 'node:process';
 
 import { type CommandsRegistry, registerCommand, runCommand } from "./commands/commands.js";
-import { handlerLogin, handlerRegister } from "./commands/users.js";
+import { handlerLogin, handlerRegister, handlerReset } from "./commands/users.js";
 
 
 async function main() {
@@ -16,6 +16,7 @@ async function main() {
     const registry: CommandsRegistry = {};
     registerCommand(registry, "login", handlerLogin);
     registerCommand(registry, "register", handlerRegister);
+    registerCommand(registry, "reset", handlerReset);
 
     try {
         await runCommand(registry, cmd, ...cmdArgs);
@@ -33,9 +34,6 @@ async function main() {
 
 main();
 
-// import { createUser, getUser } from "./lib/db/queries/users.js";
 
-// const data = await createUser("bob");
-// console.log(data);
 
 
