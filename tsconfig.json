@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "baseUrl": ".",
+        //"baseUrl": ".",
         "target": "esnext",
         "module": "esnext",
         "rootDir": "./src",
@@ -8,7 +8,10 @@
         "strict": true,
         "moduleResolution": "Node",
         "esModuleInterop": true,
-        "skipLibCheck": true
+        "skipLibCheck": true,
+        "types": [
+            "node"
+        ]
     },
     "include": [
         "./src/**/*.ts"
