@@ -10,6 +10,7 @@ type Config = {
 export function setUser(userName: string) {
     const cfg = readConfig();
     cfg.currentUserName = userName;
+    console.log("cfg: ", cfg)
     writeConfig(cfg);
 };
 
