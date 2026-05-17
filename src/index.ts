@@ -4,6 +4,7 @@ import { type CommandsRegistry, registerCommand, runCommand } from "./commands/c
 import { handlerLogin, handlerRegister, handlerReset, handlerUsers } from "./commands/users.js";
 import { handlerAgg } from './commands/aggregate.js';
 import { handlerAddFeed, handlerFeeds } from './commands/feeds.js';
+import { handlerFollow, handlerFollowing } from './commands/follow.js';
 
 
 async function main() {
@@ -23,6 +24,8 @@ async function main() {
     registerCommand(registry, "agg", handlerAgg);
     registerCommand(registry, "addfeed", handlerAddFeed);
     registerCommand(registry, "feeds", handlerFeeds);
+    registerCommand(registry, "follow", handlerFollow);
+    registerCommand(registry, "following", handlerFollowing);
 
     try {
         await runCommand(registry, cmd, ...cmdArgs);

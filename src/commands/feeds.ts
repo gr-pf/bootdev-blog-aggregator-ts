@@ -1,11 +1,13 @@
 import { readConfig } from "../config.js";
+import { createFeedFollow } from "../lib/db/queries/feed_follows.js";
 import { createFeed, getFeeds } from "../lib/db/queries/feeds.js";
 import { getUser, getUserById } from "../lib/db/queries/users.js";
 import type { Feed, User } from "../lib/db/schema.js";
+import { printFeedFollow } from "./follow.js";
 
 export async function handlerAddFeed(cmdName: string, ...args: string[]) {
     if (args.length < 2) {
-        throw new Error(`the ${cmdName} handler expects a two arguments, the name and the url of the feed.`)
+        throw new Error(`the ${cmdName} handler expects two arguments, the name and the url of the feed.`);
     }
 
     const currentUser = readConfig().currentUserName;
@@ -16,16 +18,20 @@ export async function handlerAddFeed(cmdName: string, ...args: string[]) {
     const feedUrl = args[1];
     const userData = await getUser(currentUser);
     if (!userData) {
-        throw new Error(`${currentUser} doesn't exist in db.`)
+        throw new Error(`${currentUser} doesn't exist in db.`);
     }
     const userId = userData.id;
 
     const checkFeed = await createFeed(feedName, feedUrl, userId);
     if (!checkFeed) {
-        throw new Error("Error: feed not created")
+        throw new Error("Error: feed not created");
     }
-    console.log("Success: feed successfully created")
-    printFeed(checkFeed, userData)
+
+    const feedFollow = await createFeedFollow(userId, checkFeed.id);
+    printFeedFollow(feedFollow.user_name, feedFollow.feed_name);
+
+    console.log("Success: feed successfully created");
+    printFeed(checkFeed, userData);
 
 }
 
@@ -40,7 +46,7 @@ export async function handlerFeeds(cmdName: string, ...args: string[]) {
     for (const feed of feeds) {
         const user = await getUserById(feed.userId)
         if (!user) {
-            throw new Error(`No user for the feed : ${feed.id} - ${feed.name}`)
+            throw new Error(`No user for the feed : ${feed.id} - ${feed.name}`);
         }
         printFeed(feed, user);
         console.log("********************************");
