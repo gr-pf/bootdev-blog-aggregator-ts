@@ -1,19 +1,15 @@
 import { createFeedFollow, getFeedFollowsForUser } from "../lib/db/queries/feed_follows";
-import { readConfig } from "../config";
-import { getUser } from "../lib/db/queries/users";
 import { getFeedByUrl } from "../lib/db/queries/feeds";
+import type { User } from "../lib/db/schema.js";
 
-export async function handlerFollow(cmdName: string, ...args: string[]) {
+export async function handlerFollow(cmdName: string, user: User, ...args: string[]) {
     if (args.length === 0) {
         throw new Error(`the ${cmdName} handler expects one argument, the url of the feed.`);
     }
 
-    const user = readConfig().currentUserName;
-    const userData = await getUser(user);
-    const userId = userData.id;
-    if (!userId) {
-        throw new Error(`${user} not in db.`)
-    }
+
+    const userId = user.id;
+
 
     const url = args[0];
     const feedData = await getFeedByUrl(url);
@@ -31,18 +27,13 @@ export async function handlerFollow(cmdName: string, ...args: string[]) {
 
 };
 
-export async function handlerFollowing(cmdName: string, ...args: string[]) {
+export async function handlerFollowing(cmdName: string, user: User, ...args: string[]) {
 
-    const user = readConfig().currentUserName;
-    const userData = await getUser(user);
-    const userId = userData.id;
-    if (!userId) {
-        throw new Error(`${user} not in db.`);
-    }
+    const userId = user.id;
 
     const feeds = await getFeedFollowsForUser(userId);
 
-    if (!feeds) {
+    if (feeds.length === 0) {
         console.log(`${user} doesn't follow any feed.`);
         return;
     }

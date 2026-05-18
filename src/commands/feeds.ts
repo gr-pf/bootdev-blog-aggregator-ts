@@ -1,26 +1,18 @@
-import { readConfig } from "../config.js";
 import { createFeedFollow } from "../lib/db/queries/feed_follows.js";
 import { createFeed, getFeeds } from "../lib/db/queries/feeds.js";
-import { getUser, getUserById } from "../lib/db/queries/users.js";
+import { getUserById } from "../lib/db/queries/users.js";
 import type { Feed, User } from "../lib/db/schema.js";
 import { printFeedFollow } from "./follow.js";
 
-export async function handlerAddFeed(cmdName: string, ...args: string[]) {
+export async function handlerAddFeed(cmdName: string, user: User, ...args: string[]) {
     if (args.length < 2) {
         throw new Error(`the ${cmdName} handler expects two arguments, the name and the url of the feed.`);
     }
 
-    const currentUser = readConfig().currentUserName;
-    if (!currentUser) {
-        throw new Error("You must log-in before creating a feed.")
-    }
     const feedName = args[0];
     const feedUrl = args[1];
-    const userData = await getUser(currentUser);
-    if (!userData) {
-        throw new Error(`${currentUser} doesn't exist in db.`);
-    }
-    const userId = userData.id;
+
+    const userId = user.id;
 
     const checkFeed = await createFeed(feedName, feedUrl, userId);
     if (!checkFeed) {
@@ -31,7 +23,7 @@ export async function handlerAddFeed(cmdName: string, ...args: string[]) {
     printFeedFollow(feedFollow.user_name, feedFollow.feed_name);
 
     console.log("Success: feed successfully created");
-    printFeed(checkFeed, userData);
+    printFeed(checkFeed, user);
 
 }
 
