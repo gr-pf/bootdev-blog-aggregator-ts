@@ -1,7 +1,7 @@
 import { createFeedFollow } from "../lib/db/queries/feed_follows.js";
 import { createFeed, getFeeds } from "../lib/db/queries/feeds.js";
 import { getUserById } from "../lib/db/queries/users.js";
-import type { Feed, User } from "../lib/db/schema.js";
+import { type Feed, type User } from "../lib/db/schema.js";
 import { printFeedFollow } from "./follow.js";
 
 export async function handlerAddFeed(cmdName: string, user: User, ...args: string[]) {
@@ -53,3 +53,4 @@ function printFeed(feed: Feed, user: User) {
     console.log(`* URL:           ${feed.url}`);
     console.log(`* User:          ${user.name}`);
 }
+

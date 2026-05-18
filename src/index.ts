@@ -29,6 +29,7 @@ async function main() {
     registerCommand(registry, "following", middlewareLoggedIn(handlerFollowing));
     registerCommand(registry, "unfollow", middlewareLoggedIn(handlerUnfollow));
 
+
     try {
         await runCommand(registry, cmd, ...cmdArgs);
     } catch (err) {
