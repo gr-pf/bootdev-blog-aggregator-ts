@@ -22,6 +22,20 @@
       "when": 1779102334266,
       "tag": "0002_silky_electro",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1779117729562,
+      "tag": "0003_puzzling_vargas",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1779124221764,
+      "tag": "0004_fancy_colleen_wing",
+      "breakpoints": true
     }
   ]
 }

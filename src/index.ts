@@ -6,6 +6,7 @@ import { handlerAgg } from './commands/aggregate.js';
 import { handlerAddFeed, handlerFeeds } from './commands/feeds.js';
 import { handlerFollow, handlerFollowing, handlerUnfollow } from './commands/follow.js';
 import { middlewareLoggedIn } from './commands/middleware.js';
+import { handlerBrowse } from './commands/browse.js';
 
 
 async function main() {
@@ -28,6 +29,7 @@ async function main() {
     registerCommand(registry, "follow", middlewareLoggedIn(handlerFollow));
     registerCommand(registry, "following", middlewareLoggedIn(handlerFollowing));
     registerCommand(registry, "unfollow", middlewareLoggedIn(handlerUnfollow));
+    registerCommand(registry, "browse", middlewareLoggedIn(handlerBrowse));
 
 
     try {

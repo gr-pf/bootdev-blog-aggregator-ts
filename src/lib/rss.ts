@@ -30,7 +30,7 @@ export async function fetchFeed(feedURL: string) {
     const xml = await response.text();
 
     const parser = new XMLParser({
-        processEntities: false
+        processEntities: true
     });
     const output = parser.parse(xml);
 

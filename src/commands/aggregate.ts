@@ -1,6 +1,8 @@
 import console from "console";
 import { getNextFeedToFetch, markFeedFetched } from "../lib/db/queries/feeds.js";
 import { fetchFeed } from "../lib/rss.js";
+import { createPost } from "../lib/db/queries/posts.js";
+import { PostInsert } from "../lib/db/schema.js";
 
 export async function handlerAgg(cmdName: string, ...args: string[]) {
     if (args.length === 0) {
@@ -45,11 +47,11 @@ async function scrapeFeeds() {
 
     console.log("========================");
     console.log(`Scraping feed: ${nextFeed.name}`);
+    console.log(
+        `Feed ${nextFeed.name} collected, ${rss.channel.item.length} posts found`,
+    );
     console.log("========================");
 
-    for (const item of rss.channel.item) {
-        console.log(item.title)
-    }
 
 
 }
