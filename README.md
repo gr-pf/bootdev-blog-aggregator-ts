@@ -1,5 +1,5 @@
 # bootdev-blog-aggregator-ts
-boot.dev project to build a blog aggregator with TypeScript 
+boot.dev project to build a blog aggregator *gator* with TypeScript 
 
 **GATOR**, it's a CLI tool that allows users to:
 
