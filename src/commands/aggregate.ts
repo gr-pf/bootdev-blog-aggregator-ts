@@ -52,6 +52,21 @@ async function scrapeFeeds() {
     );
     console.log("========================");
 
+    for (const item of rss.channel.item) {
+        let publishedAt: Date | null = new Date(item.pubDate);
+        if (isNaN(publishedAt.getTime())) {
+            publishedAt = null;
+        }
+        const post: PostInsert = {
+            url: item.link,
+            feedId: nextFeed.id,
+            title: item.title,
+            publishedAt: publishedAt,
+            description: item.description
+        }
+        const createdPost = await createPost(post)
+
+    }
 
 
 }
