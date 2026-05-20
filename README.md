@@ -34,8 +34,8 @@ Avant de commencer, assure-toi d’avoir installé :
 ### Cloner le dépot
 
 ```
-git clone https://github.com/USERNAME/REPOSITORY.git
-cd REPOSITORY
+git clone git@github.com:gr-pf/bootdev-blog-aggregator-ts.git
+cd bootdev-blog-aggregator-ts
 ```
 
 ### Installer les dépendances
@@ -55,7 +55,7 @@ CREATE DATABASE gator;
 2. Paraméter le fichier de configuration .gatorconfig.json à la racine du fichier :
 ```
 {
-  "db_url": "postgres://postgres:postgres@localhost:5432/gator?sslmode=disable",
+  "db_url": "postgres://postgres:postgres@localhost:5432/gator?sslmode=disable"
 }
 ```
 A adapter à partir du modèle :
@@ -82,8 +82,8 @@ npm run start <command> <options>
 Liste des commandes :
 
 - reset : réinitialise la bdd
-- register <user> : enregistre l'utilisateur dans la base et le log
-- login <user> : log l'utilisateur s'il a déjà été register
+- register <user> : crée un nouvel utilisateur et le connecte
+- login <user> : connecte un utilisateur existant
 - users : liste les utilisateurs et indique l'utilisateur logué
 - addfeed <feed_name> <feed_url> : ajoute le feed à l'utilisateur logué
 - feeds : liste des feeds
